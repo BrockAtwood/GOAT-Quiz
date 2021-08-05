@@ -150,6 +150,13 @@ choices.forEach((choice) => {
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
+    if (classToApply === "correct") {
+      incrementScore(CORRECT_BONUS);
+    }
+    if (classToApply === "incorrect") {
+      decreaseScore(CORRECT_BONUS);
+    }
+
     selectedChoice.parentElement.classList.add(classToApply);
 
     setTimeout(() => {
@@ -164,5 +171,15 @@ choices.forEach((choice) => {
     // console.log(selectedAnswer == currentQuestion.answer);
   });
 });
+
+incrementScore = (num) => {
+  score += num;
+  scoreText.innerText = score;
+};
+
+decreaseScore = (num) => {
+  score -= num;
+  scoreText.innerText = score;
+};
 
 startGame();
