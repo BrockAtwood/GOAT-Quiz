@@ -32,6 +32,8 @@ THEN I can save my initials and my score
 ```
 
 Screenshot:
+![Screen Shot 2021-08-05 at 12 47 29 AM](https://user-images.githubusercontent.com/87385012/128306356-a3b4cbf7-a9bc-403a-9858-a5ba148ff009.png)
+
 
 Link to Deployed application:
 https://brockatwood.github.io/GOAT-Quiz/
