@@ -83,7 +83,7 @@ let questions = [
     answer: 4,
   },
   {
-    question: "Why did Jordan abriuptly retire before the 1993-94 NBA season?",
+    question: "Why did Jordan abruptly retire before the 1993-94 NBA season?",
     choice1: "To play football",
     choice2: "To play golf",
     choice3: "To play baseball",
@@ -103,7 +103,7 @@ let questions = [
 
 //constants
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 8;
+const MAX_QUESTIONS = 10;
 
 startGame = () => {
   questionCounter = 0;
@@ -115,8 +115,9 @@ startGame = () => {
 
 getNewQuestion = () => {
   if (availableQuestions.length === 0 || questionCounter >= MAX_QUESTIONS) {
+    // localStorage.setItem("mostRecentScore");
     //sends user to the end page
-    return window.location.assign("/end.html");
+    return window.location.assign("end.html");
   }
   questionCounter++;
   questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
