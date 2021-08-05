@@ -1,9 +1,12 @@
 // console.log("Hello world from game!");
+// var timeLeft = 30,
+const timerEl = document.getElementById("timer");
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const questionCounterText = document.getElementById("questionCounter");
 const scoreText = document.getElementById("score");
+
 // console.log(choices);
 
 let currentQuestion = {};
@@ -101,13 +104,46 @@ let questions = [
   },
 ];
 
+function countdown() {
+  var timeLeft = 60;
+
+  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  var timeInterval = setInterval(function () {
+    // As long as the `timeLeft` is greater than 1
+    if (timeLeft > 1) {
+      // Set the `textContent` of `timerEl` to show the remaining seconds
+      timerEl.textContent = "Time Left: " + timeLeft + " seconds remaining";
+      // Decrement `timeLeft` by 1
+      timeLeft--;
+    } else if (timeLeft === 1) {
+      // When `timeLeft` is equal to 1, rename to 'second' instead of 'seconds'
+      timerEl.textContent = "Time Left: " + timeLeft + " second remaining";
+      timeLeft--;
+    } else {
+      // Once `timeLeft` gets to 0, set `timerEl` to an empty string
+      timerEl.textContent = "";
+      // Use `clearInterval()` to stop the timer
+      clearInterval(timeInterval);
+      // Call the `displayMessage()` function
+      displayMessage();
+    }
+  }, 1000);
+}
+
 //constants
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = 10;
+const TIME_DOWN = -10;
 
 startGame = () => {
   questionCounter = 0;
   score = 0;
+  //   timeInterval = setInterval(function () {
+  //       timeLeft --;
+  //       if (timeLeft === 0) {
+  //           return window.location.assign("end.html");
+  //       }
+  //   })
   availableQuestions = [...questions];
   //   console.log(availableQuestions);
   getNewQuestion();
@@ -183,4 +219,9 @@ decreaseScore = (num) => {
   scoreText.innerText = score;
 };
 
+decreaseTime = (num) => {
+  timerEl -= 10;
+};
+
+countdown();
 startGame();

@@ -48,3 +48,9 @@
 .hud-main-text {
   text-align: center;
 }
+
+#timer {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bolder;
+}
