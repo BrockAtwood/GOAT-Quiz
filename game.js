@@ -2,6 +2,8 @@
 
 const question = document.getElementById("question");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
+const questionCounterText = document.getElementById("questionCounter");
+const scoreText = document.getElementById("score");
 // console.log(choices);
 
 let currentQuestion = {};
@@ -101,13 +103,13 @@ let questions = [
 
 //constants
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 8;
 
 startGame = () => {
   questionCounter = 0;
   score = 0;
   availableQuestions = [...questions];
-  console.log(availableQuestions);
+  //   console.log(availableQuestions);
   getNewQuestion();
 };
 
@@ -117,6 +119,8 @@ getNewQuestion = () => {
     return window.location.assign("/end.html");
   }
   questionCounter++;
+  questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
+
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
@@ -127,18 +131,37 @@ getNewQuestion = () => {
   });
 
   availableQuestions.splice(questionIndex, 1);
-
   acceptingAnswers = true;
 };
 
 choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
-    // console.log(e.target);
     if (!acceptingAnswers) return;
+
     acceptingAnswers = false;
     const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset["number"];
-    getNewQuestion();
+
+    // const classToApply = "incorrect";
+    // if (selectedAnswer == currentQuestion.answer) {
+    //   classToApply = "correct";
+    // }
+
+    const classToApply =
+      selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
+
+    selectedChoice.parentElement.classList.add(classToApply);
+
+    setTimeout(() => {
+      selectedChoice.parentElement.classList.remove(classToApply);
+      getNewQuestion();
+    }, 1000);
+
+    // {
+    //   //   console.log(classToApply);
+    // }
+
+    // console.log(selectedAnswer == currentQuestion.answer);
   });
 });
 
